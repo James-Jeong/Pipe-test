@@ -84,15 +84,15 @@ int main(){
 		}
 		else{
 			printf("Fail to fork a ch2 process\n");
-			exit(-1);
+			exit( -1);
 		}
 	}
 	else if( pid1 == 0){ // 자식 process가 해야될 일
 		pid_t ch1_pid = getpid();
 		printf("parent: %ld | child1 start: %ld\n", ( long)( getppid()), ( long)( ch1_pid));
 
-		close( fd1[1]); // pipe1 write is not used, so it should be closed.
-		close( fd2[0]); // pipe2 read is not used, so it should be closed.
+		close( fd1[ 1]); // pipe1 write is not used, so it should be closed.
+		close( fd2[ 0]); // pipe2 read is not used, so it should be closed.
 
 		while(( n = read( fd1[ 0], buf, MAX_STR_SIZE)) > 0){ // read data from pipe1
 			for( i = 0; i < 10; i++){
@@ -111,7 +111,7 @@ int main(){
 	}
 	else{
 		printf("Fail to fork a ch1 process\n");
-		exit(-1);
+		exit( -1);
 	}
 }
 
