@@ -11,6 +11,10 @@
 
 #define MAX_STR_SIZE 10
 
+/**
+ * @brief Get strings from text file & communicate with child processes(2)
+ * @return int
+ */
 int main(){
 	pid_t pid1, pid2;
 	int fd1[2]; // fd1[0] : read, fd1[1] : write
