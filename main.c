@@ -47,8 +47,6 @@ int main(){
 		close( input); // close input text
 		close( fd1[ 1]); // pipe1 write is finished, so it have to be closed.
 
-		//wait( 0); // wait for a work of child's process
-
 		if(( pid2 = fork()) == 0){ // create other child process for working pipe2
 			pid_t ch2_pid = getpid();
 			printf("parent: %ld | child2 start: %ld\n", ( long)( getppid()), ( long)( ch2_pid));
