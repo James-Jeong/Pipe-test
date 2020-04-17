@@ -49,6 +49,7 @@ int main(){
 			pid_t ch2_pid = getpid();
 			printf("parent: %ld | child2 start: %ld\n", ( long)( getppid()), ( long)( ch2_pid));
 
+			close( fd1[ 0]); close( fd1[ 1]);
 			close( fd2[ 1]); // pipe2 write is not used, so it should be closed.
 
 			while(( n = read( fd2[ 0], buf, MAX_STR_SIZE)) > 0){ // read data from pipe2
@@ -60,17 +61,20 @@ int main(){
 
 			close( fd2[ 0]); // pipe1 read is finished, so it have to be closed.
 
-			printf("end of ch2\n");
-			exit( ch2_pid);
+			printf("end of ch2\n\n");
+			sleep( 1);
+			exit( 2);
 		}
 		else if( pid2 > 0){
+			close( fd2[ 0]); close( fd2[ 1]);
+
 			pid_t child_pid = 0;
 			pid_t parent_pid = getpid();
 
 			for( i = 0; i < 2; i++){
 				int status = 0;
 				child_pid = wait( &status);
-				printf("parent: %ld | child finish: %ld | exit status: %d\n", ( long)( parent_pid), ( long)( child_pid), WEXITSTATUS( status));
+				printf("parent: %ld | child%d finish: %ld | exit status: %d\n", ( long)( parent_pid), i, ( long)( child_pid), WEXITSTATUS( status));
 				status = 0;
 			}
 
@@ -100,7 +104,8 @@ int main(){
 		close( fd2[ 1]); // pipe2 write is finished, so it have to be closed.
 
 		printf("end of ch1\n\n");
-		exit( ch1_pid); // sign to parent process for inform to be finished this child process
+		sleep( 1);
+		exit( 1); // sign to parent process for inform to be finished this child process
 	}
 	else{
 		printf("Fail to fork a ch1 process\n");
