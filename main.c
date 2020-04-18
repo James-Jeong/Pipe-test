@@ -17,10 +17,10 @@
  */
 int main(){
 	pid_t pid1, pid2;
-	int fd1[2]; // fd1[0] : read, fd1[1] : write
-	int fd2[2]; // fd2[0] : read, fd2[1] : write
+	int fd1[ 2]; // fd1[ 0] : read, fd1[ 1] : write
+	int fd2[ 2]; // fd2[ 0] : read, fd2[ 1] : write
 	int input = 0;
-	char buf[10];
+	char buf[ MAX_STR_SIZE];
 	int i = 0;
 	ssize_t n = 0;
 
